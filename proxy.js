@@ -168,5 +168,5 @@ app.get('/api/spotify/albums/:albumId/tracks', async (req, res) => {
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log('Proxy server running on https://devproxy.carfora.xyz');
+  console.log(`Proxy server running on ${process.env.PROXY_URL}`);
 });
