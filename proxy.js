@@ -1,10 +1,11 @@
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+require('dotenv').config();
 
-const CLIENT_ID = '9a721507ff6545738b8d18d7c3af5c01';
-const CLIENT_SECRET = 'e4fa90efe43e49f29d7e337b1a41779d';
-const REDIRECT_URI = 'exp://192.168.0.254:8081/--/spotify-auth-callback';
+const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID
+const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
+const REDIRECT_URI = process.env.SPOTIFY_REDIRECT_URI;
 const PORT = 5000;
 
 const spotifyApi = axios.create({

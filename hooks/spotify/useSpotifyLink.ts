@@ -4,7 +4,7 @@ import { makeRedirectUri, useAuthRequest, CodeChallengeMethod } from 'expo-auth-
 export const useSpotifyLink = () => {
   const codeVerifierRef = useRef<string | null>(null);
   const [isReady, setIsReady] = useState(false);
-  
+
   const redirectUri = makeRedirectUri({
     scheme: 'exp',
     path: 'spotify-auth-callback'
