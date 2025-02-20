@@ -3,8 +3,9 @@ import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from 'config/firebase';
 import { SpotifyTokens } from 'types/spotify/spotifyUser';
 import * as SecureStore from 'expo-secure-store';
+import Config from 'react-native-config';
 
-const PROXY_URL = 'https://devproxy.carfora.xyz';
+const PROXY_URL = Config.PROXY_URL;
 const REFRESH_THRESHOLD = 5 * 60 * 1000;
 
 export const useSpotifyTokens = () => {
@@ -13,7 +14,7 @@ export const useSpotifyTokens = () => {
   const saveTokens = async (uid: string, tokens: SpotifyTokens) => {
     await SecureStore.setItemAsync(`spotify_tokens_${uid}`, JSON.stringify(tokens));
     setCurrentTokens(tokens);
-    
+
     await setDoc(doc(db, 'users', uid), {
       spotifyConnected: true,
       spotifyTokensUpdatedAt: serverTimestamp(),
@@ -60,7 +61,7 @@ export const useSpotifyTokens = () => {
   const getValidToken = async (uid: string): Promise<string | null> => {
     try {
       let tokens = currentTokens || await getStoredTokens(uid);
-      
+
       if (!tokens) return null;
 
       if (tokens.expiresAt - Date.now() <= REFRESH_THRESHOLD) {

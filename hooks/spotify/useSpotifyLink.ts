@@ -1,9 +1,13 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { makeRedirectUri, useAuthRequest, CodeChallengeMethod } from 'expo-auth-session';
+import Config from 'react-native-config';
 
 export const useSpotifyLink = () => {
   const codeVerifierRef = useRef<string | null>(null);
   const [isReady, setIsReady] = useState(false);
+  const clientId = Config.SPOTIFY_CLIENT_ID;
+  const proxyURL = Config.PROXY_URL;
+
 
   const redirectUri = makeRedirectUri({
     scheme: 'exp',
@@ -12,7 +16,7 @@ export const useSpotifyLink = () => {
 
   const [request, response, promptAsync] = useAuthRequest(
     {
-      clientId: '9a721507ff6545738b8d18d7c3af5c01',
+      clientId: clientId!,
       scopes: ['user-read-email', 'user-top-read', 'playlist-read-private'],
       redirectUri,
       codeChallengeMethod: CodeChallengeMethod.S256,
@@ -37,7 +41,7 @@ export const useSpotifyLink = () => {
     }
 
     try {
-      const response = await fetch('https://devproxy.carfora.xyz/api/token', {
+      const response = await fetch(proxyURL!, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
