@@ -22,6 +22,17 @@ Eclectic taste in music? Need to show your friends you liked an artist before th
 - [ ] Optimise web app
 - [ ] Add Like/comment features on individual reviews
 
+## Screenshots
+
+![](./images/1.png)
+![](./images/2.png)
+![](./images/3.png)
+![](./images/4.png)
+![](./images/5.png)
+![](./images/6.png)
+![](./images/7.png)
+![](./images/8.png)
+
 ## Installation
 
 1. Clone the repository to your local machine.
